@@ -1,4 +1,4 @@
-const logger = require("./logger");
+const logger = require("./logging/index.js");
 
 logger("scheduler.js запущен");
 
