@@ -1,7 +1,8 @@
-const { appName } = require("../config/index.js");
+import {config} from "../config/index.js";
 
-const index = (message) => {
-    console.log(`[${appName}] ${message}`);
-};
+// Простая функция логгера
+// В будущем можно масштабировать до отдельных логгеров
 
-module.exports = index;
+export function logger(message: string): void {
+    console.log(`[${config.appName}] ${message}`);
+}
