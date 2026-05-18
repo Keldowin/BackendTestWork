@@ -1,13 +1,19 @@
-import {logger} from "../logging/logger.js";
+import { Logger } from "../logging/logger.js";
 
-logger("scheduler запущен");
+const logger = new Logger();
+
+logger.info("scheduler запущен");
 
 // Модуль выполняет только одну функцию - запускает интервал и возвращяет его
 export function scheduleTask(name: string, interval: number, task: () => void): NodeJS.Timeout {
-    logger(`Задача "${name}" зарегистрирована (интервал: ${interval} мс)`);
+    logger.info(`Задача "${name}" зарегистрирована (интервал: ${interval} мс)`);
 
     return setInterval(() => {
-        logger(`Задача [${name}] - выполняется...`);
-        task();
+        try {
+            logger.info(`Задача [${name}] - выполняется...`);
+            task();
+        } catch (e) {
+            logger.error(`Ошибка в выполнении задачи - ${e}`);
+        }
     }, interval);
 }
