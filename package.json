@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
+    "build": "tsc",
     "dev": "npx nodemon"
   },
   "repository": {
