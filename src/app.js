@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
 
 const app = express();
@@ -13,6 +15,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
+
+// OpenAPI документация
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+  },
+  apis: ['./src/routes/**/*.js']
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.use('/', require('./routes'));
 
