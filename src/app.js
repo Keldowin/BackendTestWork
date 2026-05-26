@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const fs = require('fs'); // filesystem lib
 require('dotenv').config();
 
 const app = express();
@@ -13,12 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('view engine', 'jade');
-// Раздача статических файлов из папки `uploads`
-app.use('/uploads', express.static('uploads'))
 
 app.use('/', require('./routes'));
-
-if (!fs.existsSync('uploads')) fs.mkdirSync('uploads');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
