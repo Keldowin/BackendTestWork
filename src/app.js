@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use('/', require('./routes'));
 
