@@ -1,12 +1,19 @@
-import {config} from "../config/index.js";
-import {type ILogger, LogLevel} from "./logger.types.js";
-
+const config = require('../config');
 // Простая функция логгера
 // В будущем можно масштабировать до отдельных логгеров
 
-export class Logger implements ILogger {
-    send(message: string, requestId?: string, logLevel: LogLevel = LogLevel.INFO): void {
-        const timestamp: number = Date.now();
+const LogLevel = {
+    DEBUG: 'debug',
+    INFO: 'info',
+    WARN: 'warning',
+    ERROR: 'error',
+    TRACE: 'trace',
+}
+
+
+export class Logger{
+    send(message, requestId, logLevel) {
+        const timestamp = Date.now();
 
         if (requestId === undefined) {
             console.log(`[${config.appName} / ${timestamp}] ${logLevel} | ${message}`);
@@ -16,19 +23,24 @@ export class Logger implements ILogger {
     }
 
     // Alias для разного уровня логирования
-    debug(message: string, requestId?: string): void {
+    debug(message, requestId) {
         this.send(message, requestId, LogLevel.DEBUG);
     }
-    trace(message: string, requestId?: string): void {
+    trace(message, requestId) {
         this.send(message, requestId, LogLevel.TRACE)
     }
-    info(message: string, requestId?: string): void {
+    info(message, requestId) {
         this.send(message, requestId, LogLevel.INFO)
     }
-    warn(message: string, requestId?: string): void {
+    warn(message, requestId) {
         this.send(message, requestId, LogLevel.WARN)
     }
-    error(message: string, requestId?: string): void {
+    error(message, requestId) {
         this.send(message, requestId, LogLevel.ERROR)
     }
 }
+
+module.exports = {
+    Logger,
+    LogLevel
+};

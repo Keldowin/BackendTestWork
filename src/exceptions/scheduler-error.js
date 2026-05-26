@@ -1,7 +1,7 @@
 export class SchedulerError extends Error {
-    id: string;
+    id
 
-    constructor(message: string, schedulerId: string) {
+    constructor(message, schedulerId) {
         super(message);
         this.id = schedulerId;
         Object.setPrototypeOf(this, SchedulerError.prototype);

@@ -5,7 +5,7 @@ const logger = new Logger();
 logger.info("scheduler запущен");
 
 // Модуль выполняет только одну функцию - запускает интервал и возвращяет его
-export function scheduleTask(name: string, interval: number, task: () => void): NodeJS.Timeout {
+export function scheduleTask(name, interval, task) {
     logger.info(`Задача "${name}" зарегистрирована (интервал: ${interval} мс)`);
 
     return setInterval(() => {

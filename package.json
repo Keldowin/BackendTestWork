@@ -1,39 +1,29 @@
 {
-  "name": "backendtestwork",
+  "name": "backend-work",
   "version": "1.0.0",
-  "description": "Test A qualifying assignment for the backend course from the Evercode lab",
-  "main": "src/index.js",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "test": "jest",
-    "build": "tsc",
-    "dev": "npx nodemon"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Keldowin/BackendTestWork.git"
-  },
-  "keywords": [
-    "Test",
-    "work"
-  ],
-  "author": "Keldowin (Ivanov Peter)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Keldowin/BackendTestWork/issues"
-  },
-  "homepage": "https://github.com/Keldowin/BackendTestWork#readme",
-  "devDependencies": {
-    "@jest/globals": "^30.4.1",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^25.9.0",
-    "jest": "^30.4.2",
-    "nodemon": "^3.1.14",
-    "ts-jest": "^29.4.9",
-    "typescript": "^6.0.3"
+    "start": "node ./src/bin/www",
+    "dev": "nodemon ./src/bin/www",
+    "test": "jest"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^5.2.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jdenticon": "^3.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.4.1",
+    "@types/node": "^25.9.0",
     "dotenv": "^17.4.2",
-    "tsx": "^4.22.2"
+    "jest": "^30.4.2",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
   }
 }
