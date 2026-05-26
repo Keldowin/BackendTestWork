@@ -1,36 +1,29 @@
 const CurrencyService = require("../service/currency.service");
+const BinanceService = require("../service/binance.service");
 
 const PriceController = {
     getBinanceCurrency: async (req, res) => {
         const { currency } = req.params;
 
         if (!currency)
-            return res.status(400).json({error: 'Все поля должны быть заполнены'})
+            return res.status(400).json({ error: 'Currency не передан' });
 
-        const findCurrency = CurrencyService.findName(currency)
-
+        const findCurrency = CurrencyService.findName(currency);
         if (!findCurrency)
-            return res.status(404).json({error: 'Такой currency не найден'})
+            return res.status(404).json({ error: 'Currency не найден' });
 
-        const ticker = findCurrency.ticker
+        const prices = await BinanceService.getPricesByTicker(findCurrency.ticker);
 
-        try {
-            fetch("https://api.binance.com/api/v3/ticker/price")
-                .then(res => res.json())
-                .then(currencies => {
-                    let filtered = currencies.filter(currency => {
-                        const symbol = currency.symbol || '';
-                        return symbol.includes(ticker);
-                    })
+        if (!prices)
+            return res.status(503).json({ error: 'Binance недоступен' });
 
-                    return res.json(filtered);
-                })
-                .catch(err => console.log(err));
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json({error: 'Ошибка в price'});
-        }
+        return res.json({
+            currency: findCurrency.name,
+            count: prices.length,
+            ticker: findCurrency.ticker,
+            pairs: prices,
+        });
     }
-}
+};
 
 module.exports = PriceController;

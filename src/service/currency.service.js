@@ -1,6 +1,12 @@
 // Разделяем функционал кода !
 
-let database = []
+let database = [
+    {
+        id: '1',
+        name: 'Bitcoin',
+        ticker: 'BTC'
+    }
+]
 let autoincrement = 1
 
 const CurrencyService = {
