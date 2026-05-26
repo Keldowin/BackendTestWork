@@ -48,7 +48,7 @@ describe('POST /currency', () => {
     });
 
     it("Должен добавиться новый элемент", async () => {
-        const res = await request(app)
+        await request(app)
             .post('/currency')
             .type('form')
             .send({
@@ -120,11 +120,11 @@ describe('DELETE /currency', () => {
     it("Элемент должен удалиться", async () => {
         CurrencyService.add('Bitcoin', 'BTC');
 
-        const res = await request(app)
+        await request(app)
             .delete('/currency/1')
             .expect(200);
 
-        const expected = await request(app)
+        await request(app)
             .get('/currency/1')
             .expect(404);
     })
