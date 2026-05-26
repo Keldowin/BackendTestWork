@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {StatusController, CurrencyController} = require("../controllers");
+const {StatusController, CurrencyController, PriceController} = require("../controllers");
 const {authenticateToken} = require('../middleware/auth');
 
 // Роут проверки статуса сервера
@@ -198,5 +198,7 @@ router.put('/currency/:id', CurrencyController.update)
  *         description: Валюта не найдена
  */
 router.delete('/currency/:id', CurrencyController.delete)
+
+router.get('/price/:currency', PriceController.getBinanceCurrency)
 
 module.exports = router;

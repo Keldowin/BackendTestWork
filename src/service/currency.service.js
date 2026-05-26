@@ -37,7 +37,8 @@ const CurrencyService = {
 
         return database.splice(index, 1)[0]
     },
-    clear: () => { database = []; autoincrement = 1; }
+    clear: () => { database = []; autoincrement = 1; },
+    findName: (value) => { return database.find(c => c.name === value) || null }
 }
 
 module.exports = CurrencyService;
